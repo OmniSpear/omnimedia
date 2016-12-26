@@ -35,7 +35,7 @@ class OmniMediaServiceProvider extends ServiceProvider
         });
 
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/Migrations');
     }
 
     /**
