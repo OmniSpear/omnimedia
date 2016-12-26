@@ -1,6 +1,6 @@
 # Omnispear Media
 
-This package is a very simple package that allows the creation of a Media Library, very useful for integration with blog's and Slide show managers.
+This package is a very simple package that allows the creation of a Media Library, very useful for integration with blog's and slide show managers.
 
 ## Installing
 
