@@ -24,7 +24,7 @@ class OmniMediaServiceProvider extends ServiceProvider
         // Load the routes for the package
         include __DIR__ . '/routes.php';
 
-        Route::bind('media', function ($value) {
+        \Route::bind('media', function ($value) {
             $media = Media::whereStorageLocation($value)->first();
 
             if(!$media) {
