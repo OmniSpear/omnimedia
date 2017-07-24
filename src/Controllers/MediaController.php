@@ -18,7 +18,7 @@ class MediaController extends Controller
 
         if (is_array($size)) {
             $image = Image::cache(function ($image) use ($path, $request) {
-                $image->make($path);
+                $image->make($path)->orientate();
 
                 if ($request->has('width') && $request->has('height')) {
                     $image->resize($request->get('width'), $request->get('height'));
