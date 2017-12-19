@@ -24,6 +24,7 @@ class MediaService
             $mime = $file->getMimeType();
             $newFileName = uniqid() . "_" . $file->getClientOriginalName();
             $file->move(storage_path('app/files'), $newFileName);
+            touch($file->getPathname());
 
             $media = new Media();
             $media->type = $mime;
