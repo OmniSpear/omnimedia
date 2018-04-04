@@ -33,4 +33,9 @@ class MediaController extends Controller
             'messages' => []
         ];
     }
+
+    public function doc(Media $media)
+    {
+        return response()->file(storage_path() . '/app/files/' . $media->storage_location);
+    }
 }

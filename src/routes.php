@@ -9,6 +9,9 @@ Route::group(['namespace' => 'Omnispear\Media\Controllers', 'middleware' => ['we
         Route::get('/image/{media}', [
             'as' => 'image', 'uses' => 'MediaController@image'
         ]);
+        Route::get('/doc/{media}', [
+            'as' => 'doc', 'uses' => 'MediaController@doc'
+        ]);
     });
 
     Route::group(['namespace' => 'Admin', 'middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
