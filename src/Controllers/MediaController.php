@@ -45,7 +45,9 @@ class MediaController extends Controller
 
         return [
             'error' => true,
-            'messages' => []
+            'messages' => [
+                'Incorrect image size provided'
+            ]
         ];
     }
 
