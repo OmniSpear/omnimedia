@@ -11,11 +11,4 @@ composer require omnispear/media
 ```
 
 ### Configuring OmniMedia
-
-To install into a Laravel project, first do the composer install then add the following class to your config/app.php service providers list.
-
-`Omnispear\Media\OmniMediaServiceProvider::class`
-
-Once this package has been added to service provider list, run database migrations...
-
-`php artisan migrate`
+Run `php artisan migrate` to create media tables

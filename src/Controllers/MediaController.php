@@ -1,4 +1,6 @@
-<?php namespace Omnispear\Media\Controllers;
+<?php
+
+namespace Omnispear\Media\Controllers;
 
 use Intervention\Image\Facades\Image;
 use Omnispear\Media\Models\Media;
@@ -6,11 +8,24 @@ use Omnispear\Media\Requests\MediaImageRequest;
 
 class MediaController extends Controller
 {
+    /**
+     * Download an existing media item to storage
+     *
+     * @param Media $media
+     * @return mixed
+     */
     public function download(Media $media)
     {
         return response()->download(storage_path() . '/app/files/' . $media->storage_location);
     }
 
+    /**
+     * Gets an image from media
+     *
+     * @param MediaImageRequest $request
+     * @param Media $media
+     * @return array
+     */
     public function image(MediaImageRequest $request, Media $media)
     {
         $path = storage_path() . '/app/files/' . $media->storage_location;
@@ -34,6 +49,12 @@ class MediaController extends Controller
         ];
     }
 
+    /**
+     * Gets an image associated with the media item
+     *
+     * @param Media $media
+     * @return mixed
+     */
     public function doc(Media $media)
     {
         return response()->file(storage_path() . '/app/files/' . $media->storage_location);

@@ -1,7 +1,7 @@
 <?php
+
 namespace Omnispear\Media;
 
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Cviebrock\ImageValidator\ImageValidatorServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
@@ -14,32 +14,27 @@ use Omnispear\Media\Models\Media;
 
 class OmniMediaServiceProvider extends ServiceProvider
 {
-
     /**
-     * Load the resources
-     *
+     * Load the resources into project
      */
-    public function boot(DispatcherContract $events)
+    public function boot()
     {
-        // Load the routes for the package
-        include __DIR__ . '/routes.php';
+        $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/Migrations');
 
         \Route::bind('media', function ($value) {
             $media = Media::whereStorageLocation($value)->first();
 
-            if(!$media) {
+            if (!$media) {
                 $media = Media::findOrFail($value);
             }
 
             return $media;
         });
-
-
-        $this->loadMigrationsFrom(__DIR__ . '/../database/Migrations');
     }
 
     /**
-     * Register the service provider.
+     * Register the service provider
      *
      * @return void
      */

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Media extends Model
 {
-
     use SoftDeletes;
 
     /**
@@ -22,13 +21,9 @@ class Media extends Model
      *
      * @var array
      */
-    protected $fillable = [];
-
-    /**
-     * Set or unset the timestamps for the model
-     *
-     * @var bool
-     */
-    public $timestamps = true;
-
+    protected $fillable = [
+        'type',
+        'storage_location',
+        'file_name'
+    ];
 }
