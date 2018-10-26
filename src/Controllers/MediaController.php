@@ -16,7 +16,13 @@ class MediaController extends Controller
      */
     public function download(Media $media)
     {
-        return response()->download(storage_path() . '/app/files/' . $media->storage_location);
+        $name = $media->storage_location;
+
+        if (request()->has('name')) {
+            $name = request()->get('name');
+        }
+
+        return response()->download(storage_path() . '/app/files/' . $media->storage_location, $name);
     }
 
     /**
