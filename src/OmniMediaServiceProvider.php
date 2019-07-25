@@ -2,15 +2,15 @@
 
 namespace Omnispear\Media;
 
+use Collective\Html\FormFacade;
+use Collective\Html\HtmlFacade;
+use Collective\Html\HtmlServiceProvider;
 use Cviebrock\ImageValidator\ImageValidatorServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Omnispear\Media\Events\ViewPostEvent;
-use Omnispear\Media\Facades\OmniBlog;
-use Omnispear\Media\Listeners\PostViewListener;
-use Omnispear\Media\Middleware\Authenticate;
-use Omnispear\Media\Middleware\RedirectIfAuthenticated;
+use Intervention\Image\ImageServiceProvider;
 use Omnispear\Media\Models\Media;
+use Route;
 
 class OmniMediaServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,7 @@ class OmniMediaServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
         $this->loadMigrationsFrom(__DIR__ . '/../database/Migrations');
 
-        \Route::bind('media', function ($value) {
+        Route::bind('media', function ($value) {
             $media = Media::whereStorageLocation($value)->first();
 
             if (!$media) {
@@ -42,11 +42,11 @@ class OmniMediaServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $this->app->register(\Collective\Html\HtmlServiceProvider::class);
+        $this->app->register(HtmlServiceProvider::class);
         $this->app->register(ImageValidatorServiceProvider::class);
-        $this->app->register(\Intervention\Image\ImageServiceProvider::class);
+        $this->app->register(ImageServiceProvider::class);
 
-        $loader->alias('Form', \Collective\Html\FormFacade::class);
-        $loader->alias('Html', \Collective\Html\HtmlFacade::class);
+        $loader->alias('Form', FormFacade::class);
+        $loader->alias('Html', HtmlFacade::class);
     }
 }
