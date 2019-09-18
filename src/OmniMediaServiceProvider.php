@@ -5,7 +5,6 @@ namespace Omnispear\Media;
 use Collective\Html\FormFacade;
 use Collective\Html\HtmlFacade;
 use Collective\Html\HtmlServiceProvider;
-use Cviebrock\ImageValidator\ImageValidatorServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Intervention\Image\ImageServiceProvider;
@@ -43,7 +42,6 @@ class OmniMediaServiceProvider extends ServiceProvider
         $loader = AliasLoader::getInstance();
 
         $this->app->register(HtmlServiceProvider::class);
-        $this->app->register(ImageValidatorServiceProvider::class);
         $this->app->register(ImageServiceProvider::class);
 
         $loader->alias('Form', FormFacade::class);
