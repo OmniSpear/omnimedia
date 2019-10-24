@@ -55,4 +55,25 @@ class MediaService
 
         return $media;
     }
+
+    /**
+     * Remove a media item from storage
+     *
+     * @param $media
+     * @return boolean
+     */
+    public function removeFile($media) {
+        if (!$media) {
+            return false;
+        }
+
+        $filePath = storage_path() . '/app/files/' . $media->storage_location;
+
+        $success = $media->forceDelete();
+        if ($success) {
+            $success = unlink($filePath);
+        }
+
+        return $success;
+    }
 }
