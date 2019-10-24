@@ -41,8 +41,16 @@ class MediaController extends Controller
             $image = Image::cache(function ($image) use ($path, $request) {
                 $image->make($path)->orientate();
 
+                $cropType = $request->get('cropType', 'resize');
+
                 if ($request->has('width') && $request->has('height')) {
-                    $image->resize($request->get('width'), $request->get('height'));
+                    if($cropType === 'fit') {
+                        $image->fit($request->get('width'), $request->get('height'));
+                    } else if($cropType === 'crop') {
+                        $image->crop($request->get('width'), $request->get('height'));
+                    } else {
+                        $image->resize($request->get('width'), $request->get('height'));
+                    }
                 }
             }, 60 * 60 * 1000 * 24, true);
 
