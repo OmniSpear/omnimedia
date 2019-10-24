@@ -15,7 +15,7 @@ class MediaService
 {
     /**
      * Turns an uploaded file into a Media object that is stored into the database
-     * 
+     *
      * @param UploadedFile $file
      * @return null|Media
      */
@@ -30,7 +30,8 @@ class MediaService
             $media = Media::create([
                 'type' => $file->getMimeType(),
                 'storage_location' => $newFileName,
-                'file_name' => $file->getClientOriginalName()
+                'file_name' => $file->getClientOriginalName(),
+                'file_size' => $file->getClientSize()
             ]);
 
             return $media;
