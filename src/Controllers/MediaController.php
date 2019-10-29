@@ -34,6 +34,8 @@ class MediaController extends Controller
      */
     public function image(MediaImageRequest $request, Media $media)
     {
+        ini_set('memory_limit', '512M');
+
         $path = storage_path() . '/app/files/' . $media->storage_location;
         $size = getimagesize($path);
 
@@ -44,9 +46,9 @@ class MediaController extends Controller
                 $cropType = $request->get('cropType', 'resize');
 
                 if ($request->has('width') && $request->has('height')) {
-                    if($cropType === 'fit') {
+                    if ($cropType === 'fit') {
                         $image->fit($request->get('width'), $request->get('height'));
-                    } else if($cropType === 'crop') {
+                    } else if ($cropType === 'crop') {
                         $image->crop($request->get('width'), $request->get('height'));
                     } else {
                         $image->resize($request->get('width'), $request->get('height'));
