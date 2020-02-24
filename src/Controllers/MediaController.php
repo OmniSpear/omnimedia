@@ -44,10 +44,11 @@ class MediaController extends Controller
                 $image->make($path)->orientate();
 
                 $cropType = $request->get('cropType', 'resize');
+                $cropPosition = $request->get('cropPosition', 'center');
 
                 if ($request->has('width') && $request->has('height')) {
                     if ($cropType === 'fit') {
-                        $image->fit($request->get('width'), $request->get('height'));
+                        $image->fit($request->get('width'), $request->get('height'), null, $cropPosition);
                     } else if ($cropType === 'crop') {
                         $image->crop($request->get('width'), $request->get('height'));
                     } else {
